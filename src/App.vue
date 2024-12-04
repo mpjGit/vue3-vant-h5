@@ -41,7 +41,7 @@ onMounted(() => {
 
 <template>
   <VanConfigProvider :theme="mode">
-    <NavBar />
+    <!-- <NavBar /> -->
     <router-view v-slot="{ Component, route }">
       <section class="app-wrapper">
         <keep-alive :include="keepAliveRouteNames">
@@ -49,7 +49,7 @@ onMounted(() => {
         </keep-alive>
       </section>
     </router-view>
-    <TabBar />
+    <!-- <TabBar /> -->
   </VanConfigProvider>
 </template>
 

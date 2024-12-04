@@ -13,7 +13,7 @@ import VueRouter from 'unplugin-vue-router/vite'
 import mockDevServerPlugin from 'vite-plugin-mock-dev-server'
 import { VitePWA } from 'vite-plugin-pwa'
 import Sitemap from 'vite-plugin-sitemap'
-import VueDevTools from 'vite-plugin-vue-devtools'
+// import VueDevTools from 'vite-plugin-vue-devtools'
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import { createViteVConsole } from './vconsole'
 import { loadEnv } from 'vite'
@@ -92,7 +92,7 @@ export function createVitePlugins(mode: string) {
 
     // 调试工具（暂时不需要）
     // https://github.com/vuejs/devtools-next
-    VueDevTools(),
+    // VueDevTools(),
 
     // https://github.com/antfu/vite-plugin-pwa
     VitePWA({
