@@ -90,6 +90,7 @@ export function createVitePlugins(mode: string) {
     // https://github.com/vadxq/vite-plugin-vconsole
     createViteVConsole(),
 
+    // 调试工具（暂时不需要）
     // https://github.com/vuejs/devtools-next
     VueDevTools(),
 
