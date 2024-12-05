@@ -3,9 +3,10 @@ import type { PickerColumn } from 'vant'
 // import useAppStore from '@/stores/modules/app'
 import { languageColumns, locale } from '@/utils/i18n'
 import TopBg from '@/assets/images/home-top-bg.jpg'
+import BottomBg from '@/assets/images/bg_bottom.png'
 
 // const appStore = useAppStore()
-const checked = ref<boolean>(isDark.value)
+const checked = ref<boolean>(false)
 
 // form 数据
 const form = reactive({
@@ -26,7 +27,7 @@ watch(
 //   appStore.switchMode(isDark.value ? 'dark' : 'light')
 // }
 
-const { t } = useI18n()
+// const { t } = useI18n()
 
 const showLanguagePicker = ref(false)
 const languageValues = ref<Array<string>>([locale.value])
@@ -37,18 +38,18 @@ function onLanguageConfirm(event: { selectedOptions: PickerColumn }) {
   showLanguagePicker.value = false
 }
 
-function onSubmit(values) {
-  console.log('val ====> ', values)
-}
+function handleLogin() {}
 
-const menuItems = computed(() => ([
-  { title: t('menus.mockGuide'), route: 'mock' },
-  { title: t('menus.echartsDemo'), route: 'charts' },
-  { title: t('menus.unocssExample'), route: 'unocss' },
-  { title: t('menus.persistPiniaState'), route: 'counter' },
-  { title: t('menus.keepAlive'), route: 'keepalive' },
-  { title: t('menus.404Demo'), route: 'unknown' },
-]))
+function fetchVerifyCode() {}
+
+// const menuItems = computed(() => [
+//   { title: t('menus.mockGuide'), route: 'mock' },
+//   { title: t('menus.echartsDemo'), route: 'charts' },
+//   { title: t('menus.unocssExample'), route: 'unocss' },
+//   { title: t('menus.persistPiniaState'), route: 'counter' },
+//   { title: t('menus.keepAlive'), route: 'keepalive' },
+//   { title: t('menus.404Demo'), route: 'unknown' },
+// ])
 </script>
 
 <template>
@@ -92,39 +93,59 @@ const menuItems = computed(() => ([
 <VanCell is-link :title="t('menus.language')" :value="language" @click="showLanguagePicker = true" />
 </VanCellGroup> -->
 
-  <van-form class="login-form" @submit="onSubmit">
-    <van-cell-group inset>
-      <van-field
-        v-model="form.phone" name="用户名" label="用户名" placeholder="用户名"
-        :rules="[{ required: true, message: '请填写用户名' }]"
-      />
-      <van-field
-        v-model="form.verify" name="验证码" label="验证码" placeholder="验证码"
-        :rules="[{ required: true, message: '请填写验证码' }]"
-      >
-        <template #button>
-          <van-button round plain block native-type="submit">
-            获取验证码
-          </van-button>
-        </template>
-      </van-field>
-    </van-cell-group>
-    <div style="margin: 16px;">
-      <van-button round block type="primary" native-type="submit">
-        提交
-      </van-button>
+  <div class="login-form">
+    <div class="form-item form-phone">
+      <div class="input-prefix">
+        +86
+      </div>
+      <div class="input-content">
+        <input
+          v-model="form.phone"
+          class="login-form-input"
+          type="text"
+          placeholder="输入手机号"
+        >
+      </div>
     </div>
-  </van-form>
-
-  <VanCellGroup :title="t('menus.exampleComponents')" :border="false" :inset="true">
-    <template v-for="item in menuItems" :key="item.route">
-      <VanCell :title="item.title" :to="item.route" is-link />
-    </template>
-  </VanCellGroup>
+    <div class="form-item form-verify">
+      <div class="input-content">
+        <input
+          v-model="form.verify"
+          class="login-form-input verify-input"
+          type="text"
+          placeholder="输入验证码"
+        >
+      </div>
+      <div class="input-append" @click.stop="fetchVerifyCode">
+        获取验证码
+      </div>
+    </div>
+    <div class="form-submit" @click.stop="handleLogin">
+      登录
+    </div>
+    <div class="user-msg">
+      <div class="u-checkbox">
+        <van-checkbox v-model="checked" shape="square">
+          我已同意
+        </van-checkbox>
+        <a href="">《注册与居间服务协议》</a>
+        和
+        <a href="">《隐私政策》</a>
+      </div>
+      <div class="police">
+        备案号：湘ICP备2021004843号-1
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <img :src="BottomBg" alt="">
+  </div>
 
   <van-popup v-model:show="showLanguagePicker" position="bottom">
     <van-picker
-      v-model="languageValues" :columns="languageColumns" @confirm="onLanguageConfirm"
+      v-model="languageValues"
+      :columns="languageColumns"
+      @confirm="onLanguageConfirm"
       @cancel="showLanguagePicker = false"
     />
   </van-popup>
@@ -201,12 +222,107 @@ const menuItems = computed(() => ([
   }
 }
 .login-form {
-  margin-top: 20vw;
+  margin-top: 15vw;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  .form-item {
+    width: 300px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #f4f4f4;
+    padding: 2vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    &:last-child {
+      padding: 0 18px;
+    }
+
+    .input-prefix {
+      border-right: 1px solid #000;
+      font-size: 16px;
+      font-family: PingFang SC;
+      font-weight: 500;
+      color: #000;
+      text-align: center;
+      width: 14vw;
+    }
+    .input-content {
+      flex: 1;
+      input {
+        background: none;
+        outline: none;
+        border: 0px;
+      }
+      .verify-input {
+        position: relative;
+        left: 10px;
+      }
+    }
+    .input-append {
+      min-width: 90px;
+      padding: 0 10px;
+      line-height: 30px;
+      text-align: center;
+      background: #fff;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      font-size: 14px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: #666;
+      position: relative;
+      right: 20px;
+    }
+  }
+  .form-submit {
+    width: 300px;
+    line-height: 50px;
+    background: #2b6295;
+    border-radius: 25px;
+    font-size: 16px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+  }
+  .user-msg {
+    width: 350px;
+    margin: 20px auto;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    color: #000;
+
+    .u-checkbox {
+      width: 100%;
+      height: 18px;
+      line-height: 18px;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .police {
+      color: rgb(144, 144, 144);
+      padding-top: 10px;
+      font-size: 14px;
+    }
+  }
 }
-::v-deep {
-  .van-cell__title.van-field__label lable {
-    position: relative;
-    top: 15px;
+.bottom {
+  width: 100%;
+  height: 220px;
+  img {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
