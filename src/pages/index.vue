@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import type { PickerColumn } from 'vant'
+import { useRouter } from 'vue-router'
 // import useAppStore from '@/stores/modules/app'
 import { languageColumns, locale } from '@/utils/i18n'
 import TopBg from '@/assets/images/home-top-bg.jpg'
 import BottomBg from '@/assets/images/bg_bottom.png'
 
 // const appStore = useAppStore()
-const checked = ref<boolean>(false)
+const router = useRouter()
 
 // form 数据
 const form = reactive({
   phone: '',
-  verify: '',
+  accept: false,
 })
 
+// 观测是否是黑夜模式
 watch(
   () => isDark.value,
-  (newMode) => {
-    checked.value = newMode
-  },
+  () => {},
   { immediate: true },
 )
 
@@ -38,9 +38,11 @@ function onLanguageConfirm(event: { selectedOptions: PickerColumn }) {
   showLanguagePicker.value = false
 }
 
-function handleLogin() {}
+function handleLogin() {
+  router.push('/profile')
+}
 
-function fetchVerifyCode() {}
+// function fetchVerifyCode() {}
 
 // const menuItems = computed(() => [
 //   { title: t('menus.mockGuide'), route: 'mock' },
@@ -107,25 +109,12 @@ function fetchVerifyCode() {}
         >
       </div>
     </div>
-    <div class="form-item form-verify">
-      <div class="input-content">
-        <input
-          v-model="form.verify"
-          class="login-form-input verify-input"
-          type="text"
-          placeholder="输入验证码"
-        >
-      </div>
-      <div class="input-append" @click.stop="fetchVerifyCode">
-        获取验证码
-      </div>
-    </div>
     <div class="form-submit" @click.stop="handleLogin">
       登录
     </div>
     <div class="user-msg">
       <div class="u-checkbox">
-        <van-checkbox v-model="checked" shape="square">
+        <van-checkbox v-model="form.accept" shape="square">
           我已同意
         </van-checkbox>
         <a href="">《注册与居间服务协议》</a>
