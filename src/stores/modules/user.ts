@@ -15,6 +15,7 @@ const InitUserInfo = {
   uid: 0,
   nickname: '',
   avatar: '',
+  phone: '',
 }
 
 export const useUserStore = defineStore('user', () => {
@@ -23,6 +24,10 @@ export const useUserStore = defineStore('user', () => {
   // Set user's information
   const setInfo = (partial: Partial<UserState>) => {
     userInfo.value = { ...partial }
+  }
+
+  const setPhone = (phone: string) => {
+    userInfo.value.phone = phone
   }
 
   const login = async (loginForm: LoginData) => {
@@ -90,6 +95,7 @@ export const useUserStore = defineStore('user', () => {
     getCode,
     reset,
     register,
+    setPhone,
   }
 }, {
   persist: true,

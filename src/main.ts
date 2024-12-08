@@ -7,6 +7,8 @@ import 'virtual:uno.css'
 import '@/styles/app.less'
 import '@/styles/var.less'
 import { i18n } from '@/utils/i18n'
+import jQueryPlugin from '@/utils/jquery'
+import vueEsign from 'vue-esign'
 
 // Vant 桌面端适配
 import '@vant/touch-emulator'
@@ -29,5 +31,7 @@ app.use(head)
 app.use(router)
 app.use(pinia)
 app.use(i18n)
+app.use(jQueryPlugin) // 使用jquery
+app.use(vueEsign) // 使用jquery
 
 app.mount('#app')

@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import type { PickerColumn } from 'vant'
+import { type PickerColumn, showToast } from 'vant'
 import { useRouter } from 'vue-router'
-// import useAppStore from '@/stores/modules/app'
+import { useUserStore } from '@/stores'
 import { languageColumns, locale } from '@/utils/i18n'
 import TopBg from '@/assets/images/home-top-bg.jpg'
 import BottomBg from '@/assets/images/bg_bottom.png'
+import { validatePhoneNumber } from '@/utils/data264'
 
-// const appStore = useAppStore()
+const userStore = useUserStore()
 const router = useRouter()
 
 // form 数据
@@ -39,6 +40,13 @@ function onLanguageConfirm(event: { selectedOptions: PickerColumn }) {
 }
 
 function handleLogin() {
+  if (!form.phone || !validatePhoneNumber(form.phone)) {
+    return showToast('请输入正确的手机号！')
+  }
+  if (!form.accept) {
+    return showToast('请勾选同意隐私政策！')
+  }
+  userStore.setPhone(form.phone)
   router.push('/profile')
 }
 

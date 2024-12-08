@@ -25,6 +25,7 @@ const include = [
   'unplugin-vue-router/runtime',
   'unplugin-vue-router/data-loaders',
   'unplugin-vue-router/data-loaders/basic',
+  'jquery',
 ]
 
 const exclude = [

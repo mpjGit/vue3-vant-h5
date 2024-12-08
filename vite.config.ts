@@ -20,9 +20,14 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       port: 3000,
       proxy: {
         '/api': {
-          target: '',
+          target: 'http://47.93.55.40:447/loanonlineapplication/user',
           ws: false,
           changeOrigin: true,
+          bypass(req, res, options) {
+            const proxyURL = options.target + options.rewrite(req.url)
+            res?.setHeader('x-req-proxyURL', proxyURL)
+          },
+          rewrite: path => path.replace(/^\/api/, ''),
         },
       },
     },
