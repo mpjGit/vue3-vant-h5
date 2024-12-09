@@ -19,7 +19,7 @@ const userInfo = computed(() => userStore.userInfo)
 
 // form 数据
 const form = reactive({
-  xmFprId: 1,
+  xmFprId: 60933,
   xmPhone: userInfo.value.phone,
   xmMoniker: '', // 姓名
   xmIdNo: '', // 身份证号
@@ -110,7 +110,7 @@ async function onSubmit() {
     $.ajax({
       async: false,
       type: 'post',
-      url: 'http://47.93.55.40:447/loanonlineapplication/user/addSave',
+      url: 'https://shryf.com/loanonlineapplication/user/addSave',
       data: {
         ...form,
       },

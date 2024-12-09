@@ -20,7 +20,7 @@ export function ajaxUpload(formData) {
   return new Promise((resolve) => {
     $.ajax({
       type: 'post',
-      url: 'http://47.93.55.40:447/loanonlineapplication/user/getDkPictureUrl',
+      url: 'https://shryf.com/loanonlineapplication/user/getDkPictureUrl',
       data: formData,
       dataType: 'Jsonp',
       processData: false,
