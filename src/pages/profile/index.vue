@@ -12,6 +12,7 @@ import logo from '@/assets/images/logo.png'
 import idbg from '@/assets/images/idbg.png'
 import take from '@/assets/images/take.png'
 import contract from '@/assets/contract.png'
+import contract_z from '@/assets/images/contract-z.png'
 
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.userInfo)
@@ -534,6 +535,7 @@ function onConfirm(evt, type) {
       <div v-if="confirmContract" id="container" ref="container" class="pdf-container" @click.stop="savePoster">
         <img class="contract-img" style="width: 100%;height: 700px;" :src="contract" alt="">
         <img v-show="resultImg" class="sign_img" :src="resultImg" alt="">
+        <img class="z-img" :src="contract_z" alt="">
         <span class="name">{{ form.xmMoniker }}</span>
         <span class="time">{{ signTime }}</span>
       </div>
@@ -865,12 +867,34 @@ function onConfirm(evt, type) {
         left: 33px;
       }
     }
+    .z-img {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      z-index: 999;
+      bottom: 1vw;
+      right: 45px;
+      @media screen and (min-width: 375px) {
+        bottom: -6vw;
+        right: 25px;
+      }
+      @media screen and (min-width: 390px) {
+        bottom: 1vw;
+        right: 25px;
+      }
+      @media screen and (min-width: 410px) {
+        bottom: 16vw;
+        right: 25px;
+      }
+      @media screen and (min-width: 420px) {
+        bottom: 16vw;
+        right: 45px;
+      }
+    }
     .sign_img {
       width: 80px;
       height: 30px;
       position: absolute;
-      bottom: 23vw;
-      right: 227px;
       z-index: 999;
       bottom: -0.8%;
       left: 25px;
@@ -887,7 +911,7 @@ function onConfirm(evt, type) {
         left: 25px;
       }
       @media screen and (min-width: 420px) {
-        bottom: 22vw;
+        bottom: 23vw;
         left: 25px;
       }
     }

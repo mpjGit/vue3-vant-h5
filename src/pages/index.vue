@@ -50,6 +50,15 @@ function handleLogin() {
   router.push('/profile')
 }
 
+function previewFile(type) {
+  if (type === 'self') {
+    router.push('/selfFile')
+  }
+  else {
+    router.push('/serveFile')
+  }
+}
+
 // function fetchVerifyCode() {}
 
 // const menuItems = computed(() => [
@@ -125,9 +134,9 @@ function handleLogin() {
         <van-checkbox v-model="form.accept" shape="square">
           我已同意
         </van-checkbox>
-        <a href="">《注册与居间服务协议》</a>
+        <span style="color: #58f;" @click.stop="previewFile('serve')">《注册与居间服务协议》</span>
         和
-        <a href="">《隐私政策》</a>
+        <span style="color: #58f;" @click.stop="previewFile('self')">《隐私政策》</span>
       </div>
       <div class="police">
         备案号：湘ICP备2021004843号-1
