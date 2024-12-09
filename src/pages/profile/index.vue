@@ -842,16 +842,26 @@ function onConfirm(evt, type) {
     align-items: flex-start;
     margin-top: 20px;
     .name {
-      width: 30px;
+      width: 50px;
       height: 12px;
       line-height: 12px;
       font-size: 9px;
       position: absolute;
-      top: 0.3vw;
-      left: 33px;
       color: #454545;
-      @media screen and (max-width: 400px) {
+      @media screen and (min-width: 375px) {
         top: 1vw;
+        left: 33px;
+      }
+      @media screen and (min-width: 390px) {
+        top: 1vw;
+        left: 33px;
+      }
+      @media screen and (min-width: 410px) {
+        top: 0.5vw;
+        left: 33px;
+      }
+      @media screen and (min-width: 420px) {
+        top: 0.3vw;
         left: 33px;
       }
     }
@@ -862,8 +872,22 @@ function onConfirm(evt, type) {
       bottom: 23vw;
       right: 227px;
       z-index: 999;
-      @media screen and (max-width: 400px) {
-        bottom: 5.5vw;
+      bottom: -0.8%;
+      left: 25px;
+      @media screen and (min-width: 375px) {
+        bottom: -1vw;
+        left: 25px;
+      }
+      @media screen and (min-width: 390px) {
+        bottom: 6vw;
+        left: 25px;
+      }
+      @media screen and (min-width: 410px) {
+        bottom: 16vw;
+        left: 25px;
+      }
+      @media screen and (min-width: 420px) {
+        bottom: 22vw;
         left: 25px;
       }
     }
@@ -873,11 +897,21 @@ function onConfirm(evt, type) {
       line-height: 12px;
       font-size: 9px;
       position: absolute;
-      bottom: 17.5vw;
-      left: 35px;
       color: #454545;
-      @media screen and (max-width: 400px) {
+      @media screen and (min-width: 375px) {
+        bottom: -6vw;
+        left: 35px;
+      }
+      @media screen and (min-width: 390px) {
         bottom: 1vw;
+        left: 35px;
+      }
+      @media screen and (min-width: 410px) {
+        bottom: 11vw;
+        left: 35px;
+      }
+      @media screen and (min-width: 420px) {
+        bottom: 17.5vw;
         left: 35px;
       }
     }
