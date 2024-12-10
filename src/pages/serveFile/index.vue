@@ -2,7 +2,9 @@
 import * as PDF from 'pdfjs-dist'
 import { useRoute } from 'vue-router'
 
-PDF.GlobalWorkerOptions.workerSrc = '/dist/pdf.worker.js'
+// 路径环境变量
+const PB_PATH = import.meta.env.VITE_APP_PUBLIC_PATH
+PDF.GlobalWorkerOptions.workerSrc = `${PB_PATH}pdf.worker.js`
 let pdfDoc = null
 const pdfPages = ref(0)
 // const pdfScale = ref(0.63)
@@ -46,7 +48,8 @@ async function resolvePdf(url) {
 
 onMounted(() => {
   nextTick(() => {
-    resolvePdf('/dist/pdfs/serve.pdf')
+    const filePath = `${PB_PATH}pdfs/serve.pdf`
+    resolvePdf(filePath)
   })
 })
 </script>
