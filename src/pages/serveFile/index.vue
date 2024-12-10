@@ -46,7 +46,7 @@ async function resolvePdf(url) {
 
 onMounted(() => {
   nextTick(() => {
-    resolvePdf('/pdfs/self.pdf')
+    resolvePdf('/pdfs/serve.pdf')
   })
 })
 </script>
@@ -78,6 +78,6 @@ onMounted(() => {
 
 <route lang="json">
 {
-    "name": "selfFile"
+    "name": "serveFile"
 }
 </route>

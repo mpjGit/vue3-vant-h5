@@ -139,7 +139,7 @@ function previewFile(type) {
         <span style="color: #58f;" @click.stop="previewFile('self')">《隐私政策》</span>
       </div>
       <div class="police">
-        备案号：湘ICP备2021004843号-1
+        备案号：皖ICP备2024069740号
       </div>
     </div>
   </div>
