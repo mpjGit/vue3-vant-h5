@@ -535,7 +535,7 @@ function onConfirm(evt, type) {
         </van-checkbox>
       </van-cell-group>
       <div v-if="confirmContract" id="container" ref="container" class="pdf-container" @click.stop="savePoster">
-        <img class="contract-img" style="width: 100%;height: 700px;" :src="contract" alt="">
+        <img class="contract-img" style="width: 100%" :src="contract" alt="">
         <img v-show="resultImg" class="sign_img" :src="resultImg" alt="">
         <img class="z-img" :src="contract_z" alt="">
         <span class="name">{{ form.xmMoniker }}</span>
@@ -856,7 +856,7 @@ function onConfirm(evt, type) {
   .pdf-container {
     position: relative;
     width: 100%;
-    height: 670px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -865,9 +865,10 @@ function onConfirm(evt, type) {
       width: 50px;
       height: 12px;
       line-height: 12px;
-      font-size: 9px;
+      font-size: 10px;
       position: absolute;
-      color: #454545;
+      color: #83735d;
+      font-weight: 800;
       @media screen and (min-width: 375px) {
         top: 1vw;
         left: 33px;
@@ -881,31 +882,31 @@ function onConfirm(evt, type) {
         left: 33px;
       }
       @media screen and (min-width: 420px) {
-        top: 0.3vw;
+        top: 1vw;
         left: 33px;
       }
     }
     .z-img {
-      width: 60px;
-      height: 60px;
+      width: 130px;
+      height: 196px;
       position: absolute;
       z-index: 999;
       bottom: 1vw;
       right: 45px;
       @media screen and (min-width: 375px) {
-        bottom: -6vw;
+        bottom: -10vw;
         right: 25px;
       }
       @media screen and (min-width: 390px) {
-        bottom: 1vw;
+        bottom: -10vw;
         right: 25px;
       }
       @media screen and (min-width: 410px) {
-        bottom: 16vw;
+        bottom: -8vw;
         right: 25px;
       }
       @media screen and (min-width: 420px) {
-        bottom: 16vw;
+        bottom: -8vw;
         right: 45px;
       }
     }
@@ -917,7 +918,7 @@ function onConfirm(evt, type) {
       bottom: -0.8%;
       left: 25px;
       @media screen and (min-width: 375px) {
-        bottom: -1vw;
+        bottom: 8vw;
         left: 25px;
       }
       @media screen and (min-width: 390px) {
@@ -925,11 +926,11 @@ function onConfirm(evt, type) {
         left: 25px;
       }
       @media screen and (min-width: 410px) {
-        bottom: 16vw;
+        bottom: 8vw;
         left: 25px;
       }
       @media screen and (min-width: 420px) {
-        bottom: 23vw;
+        bottom: 8vw;
         left: 25px;
       }
     }
@@ -939,28 +940,29 @@ function onConfirm(evt, type) {
       line-height: 12px;
       font-size: 9px;
       position: absolute;
-      color: #454545;
+      color: #83735d;
+      font-weight: 800;
       @media screen and (min-width: 375px) {
-        bottom: -6vw;
+        bottom: 0.5vw;
         left: 35px;
       }
       @media screen and (min-width: 390px) {
-        bottom: 1vw;
+        bottom: 0.5vw;
         left: 35px;
       }
       @media screen and (min-width: 410px) {
-        bottom: 11vw;
+        bottom: 0.5vw;
         left: 35px;
       }
       @media screen and (min-width: 420px) {
-        bottom: 17.5vw;
+        bottom: 0.5vw;
         left: 35px;
       }
     }
 
     .contract-img {
       width: 100%; /* 设置图片宽度为容器的100% */
-      height: auto;
+      height: 840px;
     }
   }
 

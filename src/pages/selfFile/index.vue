@@ -1,6 +1,5 @@
 <script setup>
 import * as PDF from 'pdfjs-dist'
-import { useRoute } from 'vue-router'
 
 // 路径环境变量
 const PB_PATH = import.meta.env.VITE_APP_PUBLIC_PATH
