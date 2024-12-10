@@ -64,6 +64,9 @@ onMounted(() => {
 .pdf-container {
   width: 100%;
   height: 100%;
+  .canvas-x {
+    border: 1px solid #ddd;
+  }
 }
 
 .img-wrapper {
