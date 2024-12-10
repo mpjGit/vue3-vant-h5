@@ -5,6 +5,7 @@ import { useUserStore } from '@/stores'
 import { languageColumns, locale } from '@/utils/i18n'
 import TopBg from '@/assets/images/home-top-bg.jpg'
 import BottomBg from '@/assets/images/bg_bottom.png'
+import indexLogo from '@/assets/images/index-logo.png'
 import { validatePhoneNumber } from '@/utils/data264'
 
 const userStore = useUserStore()
@@ -74,6 +75,7 @@ function previewFile(type) {
 <template>
   <div class="top">
     <img class="top-bg" :src="TopBg">
+    <img class="top-logo" :src="indexLogo" alt="">
     <div class="top-show">
       <div class="show-item">
         <div class="icon">
@@ -179,7 +181,18 @@ function previewFile(type) {
     height: 100%;
   }
 
+  .top-logo {
+    width: 200px;
+    height: 160px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -100px;
+    z-index: 9;
+  }
+
   .top-show {
+    z-index: 8;
     width: 80vw;
     height: 25vw;
     position: absolute;

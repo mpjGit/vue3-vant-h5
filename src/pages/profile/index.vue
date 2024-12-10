@@ -271,7 +271,10 @@ function onConfirm(evt, type) {
         </div>
       </div>
       <div class="top-logo">
-        <img class="logo" :src="logo">
+        <div class="logo">
+          <img class="logo-img" :src="logo" alt="">
+          <span class="logo-inner">尚市华融</span>
+        </div>
         <div class="logo-txt">
           一站式贷款平台服务
         </div>
@@ -295,11 +298,10 @@ function onConfirm(evt, type) {
       </div>
       <div class="tip-body">
         {{
-          `一份信任，一份坚守，一个客户，一个朋友，感谢您对我们客服经理的信任和业务支持，杏运行将保证您的资料安全永不泄露！请您保证您申请的资料真实有效，一旦虚假，金融机构平台将会列入黑名单。所有申请需在您本人自愿的情况下申请，如果有人(诱导，冒充，强迫)您申请，可以向我们投诉。在申请过程中有任何问题，微信关注公众号【杏运行】
-        寻求帮助。特别提示：本公司无法向在校学生群体，无收入群体等提供服务。` }}
+          `一份信任，一份坚守，一个客户，一个朋友，感谢您对我们客服经理的信任和业务支持，尚市华融将保证您的资料安全永不泄露！请您保证您申请的资料真实有效，一旦虚假，金融机构平台将会列入黑名单。所有申请需在您本人自愿的情况下申请，如果有人(诱导，冒充，强迫)您申请，可以向我们投诉。特别提示：本公司无法向在校学生群体，无收入群体等提供服务。` }}
       </div>
       <div class="tip-tail">
-        {{ `特别提示：杏运行所有业务均无前期收费，不成功，不收费！如发现有冒充我们业务人员向您收取前期费用请投诉!` }}
+        {{ `特别提示：尚市华融所有业务均无前期收费，不成功，不收费！如发现有冒充我们业务人员向您收取前期费用请投诉!` }}
       </div>
     </div>
 
@@ -622,6 +624,7 @@ function onConfirm(evt, type) {
     width: 90%;
     height: 40px;
     margin-top: 80px;
+    visibility: hidden;
 
     .more-txt {
       width: 100%;
@@ -673,10 +676,25 @@ function onConfirm(evt, type) {
     align-items: center;
 
     .logo {
-      width: 80px;
-      height: 80px;
-      transform: scale(1.8) translateX(-4px);
-      transform-origin: center center;
+      width: 100%;
+      height: 60px;
+      position: relative;
+      bottom: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      align-items: center;
+      .logo-img {
+        width: 60px;
+      }
+      .logo-inner {
+        color: #000;
+        font-size: 18px;
+        font-weight: bolder;
+        height: 60px;
+        line-height: 60px;
+        text-align: left;
+      }
     }
 
     .logo-txt {
