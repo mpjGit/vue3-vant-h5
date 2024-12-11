@@ -105,6 +105,15 @@ async function onSubmit() {
   if (!xmMoniker && !xmIdNo) {
     return showToast('请检查关键信息是否填写完整!')
   }
+  if (area.value) {
+    const areaArr = area.value.split('/')
+    if (!areaArr.length && areaArr.length < 3) {
+      return showToast('请检查地址填写是否正确!')
+    }
+    form.xmProvince = areaArr[0]
+    form.xmCity = areaArr[1]
+    form.xmArea = areaArr[2]
+  }
   // 使用 jquery的 ajax 发送JSONP请求
   try {
     $.ajax({
@@ -273,7 +282,7 @@ function onConfirm(evt, type) {
       <div class="top-logo">
         <div class="logo">
           <img class="logo-img" :src="logo" alt="">
-          <span class="logo-inner">尚市华融</span>
+          <span class="logo-inner">尚士华融</span>
         </div>
         <div class="logo-txt">
           一站式贷款平台服务
@@ -679,10 +688,10 @@ function onConfirm(evt, type) {
       width: 100%;
       height: 60px;
       position: relative;
-      bottom: 16px;
+      bottom: 30px;
       display: flex;
-      justify-content: center;
-      gap: 8px;
+      justify-content: flex-start;
+      flex-direction: column;
       align-items: center;
       .logo-img {
         width: 60px;
@@ -691,8 +700,8 @@ function onConfirm(evt, type) {
         color: #000;
         font-size: 18px;
         font-weight: bolder;
-        height: 60px;
-        line-height: 60px;
+        height: 30px;
+        line-height: 30px;
         text-align: left;
       }
     }

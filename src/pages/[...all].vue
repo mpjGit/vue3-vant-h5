@@ -3,7 +3,7 @@ import { type PickerColumn, showToast } from 'vant'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores'
 import { languageColumns, locale } from '@/utils/i18n'
-import TopBg from '@/assets/images/home-top-bg.jpg'
+import TopBg from '@/assets/images/home-top-bg.png'
 import BottomBg from '@/assets/images/bg_bottom.png'
 import indexLogo from '@/assets/images/index-logo.png'
 import { validatePhoneNumber } from '@/utils/data264'
@@ -41,7 +41,11 @@ function onLanguageConfirm(event: { selectedOptions: PickerColumn }) {
 }
 
 function handleLogin() {
-  if (!form.phone || !validatePhoneNumber(form.phone)) {
+  const testPhone = validatePhoneNumber(form.phone)
+  if (!form.phone) {
+    return showToast('请输入正确的手机号！')
+  }
+  if (!testPhone.valid) {
     return showToast('请输入正确的手机号！')
   }
   if (!form.accept) {
@@ -76,6 +80,14 @@ function previewFile(type) {
   <div class="top">
     <img class="top-bg" :src="TopBg">
     <img class="top-logo" :src="indexLogo" alt="">
+    <div class="top-txt">
+      <div class="up-txt">
+        正规持牌产品
+      </div>
+      <div class="down-txt">
+        多年技术沉淀<span style="display: inline-block;width: 40px;" />百万客户信赖
+      </div>
+    </div>
     <div class="top-show">
       <div class="show-item">
         <div class="icon">
@@ -141,7 +153,7 @@ function previewFile(type) {
         <span style="color: #58f;" @click.stop="previewFile('self')">《隐私政策》</span>
       </div>
       <div class="police">
-        备案号：皖ICP备2024069740号
+        备案号：辽ICP备2023002972号
       </div>
     </div>
   </div>
@@ -185,10 +197,41 @@ function previewFile(type) {
     width: 200px;
     height: 160px;
     position: absolute;
-    top: 0;
+    top: -10%;
     left: 50%;
     margin-left: -100px;
     z-index: 9;
+  }
+
+  .top-txt {
+    width: 300px;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-left: -150px;
+    color: #fff;
+    border-top: 1px solid #fff;
+    padding-top: 5px;
+    .up-txt {
+      height: 20px;
+      line-height: 20px;
+      font-size: 20px;
+      font-weight: bolder;
+      text-align: center;
+    }
+    .down-txt {
+      text-align: center;
+      height: 18px;
+      line-height: 18px;
+      font-size: 18px;
+      font-weight: bolder;
+    }
   }
 
   .top-show {
