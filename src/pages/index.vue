@@ -262,7 +262,7 @@ function previewFile(type) {
       .icon {
         height: 10vw;
         border-radius: 50%;
-        background-color: #ece24b;
+        background-color: #2b6295;
         display: flex;
         justify-content: center;
         align-items: center;
