@@ -3,7 +3,7 @@ import { type PickerColumn, showToast } from 'vant'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores'
 import { languageColumns, locale } from '@/utils/i18n'
-import TopBg from '@/assets/images/home-top-bg.png'
+import TopBg from '@/assets/images/home-top-bg.jpg'
 import BottomBg from '@/assets/images/bg_bottom.png'
 import indexLogo from '@/assets/images/index-logo.png'
 import { validatePhoneNumber } from '@/utils/data264'
@@ -186,7 +186,7 @@ function previewFile(type) {
   width: 100%;
   height: 60vw;
   position: relative;
-  background: yellow;
+  background: #fff;
 
   .top-bg {
     width: 100%;
@@ -195,7 +195,7 @@ function previewFile(type) {
 
   .top-logo {
     width: 200px;
-    height: 160px;
+    height: 190px;
     position: absolute;
     top: -10%;
     left: 50%;
@@ -210,9 +210,9 @@ function previewFile(type) {
     justify-content: flex-start;
     flex-direction: column;
     align-items: stretch;
-    gap: 5px;
+    gap: 10px;
     position: absolute;
-    top: 30%;
+    top: 38%;
     left: 50%;
     margin-left: -150px;
     color: #fff;

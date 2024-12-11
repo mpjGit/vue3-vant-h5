@@ -5,7 +5,7 @@ import useRouteCache from '@/stores/modules/routeCache'
 import useAutoThemeSwitcher from '@/hooks/useAutoThemeSwitcher'
 
 useHead({
-  title: '杏运行 | 信贷平台',
+  title: '尚士华融 | 信贷平台',
   meta: [
     {
       name: 'description',

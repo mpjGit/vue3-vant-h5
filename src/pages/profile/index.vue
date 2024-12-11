@@ -23,7 +23,7 @@ const form = reactive({
   xmPhone: userInfo.value.phone,
   xmMoniker: '', // 姓名
   xmIdNo: '', // 身份证号
-  xmSex: '男',
+  xmSex: '',
   xmSfProvidentFund: '',
   xmSfMortgagingHousing: '',
   xmSfCheckInSalary: '',
@@ -82,6 +82,7 @@ const fileList_front = ref<any>([
 ])
 const fileList_back = ref([
 ])
+const phoneRegex = /^1[3-9]\d{9}$/
 
 function onConfirmArea({ selectedOptions }) {
   showArea.value = false
@@ -94,7 +95,14 @@ function onOversize() {
 
 async function onSubmit() {
   // 必填字段的校验
-  const { xmMoniker, xmIdNo, xmPhone } = form
+  const {
+    xmMoniker,
+    xmIdNo,
+    xmPhone,
+    xmFriendPhone,
+    xmDirectFamilyPhone,
+    xmDetailedAddress,
+  } = form
   const idAuth = isIdCard(xmIdNo)
   if (!idAuth.valid) {
     return showToast(idAuth.message)
@@ -102,7 +110,7 @@ async function onSubmit() {
   if (!xmPhone) {
     return showToast('未获取到您的手机号，请返回登录!')
   }
-  if (!xmMoniker && !xmIdNo) {
+  if (!xmMoniker || !xmIdNo) {
     return showToast('请检查关键信息是否填写完整!')
   }
   if (area.value) {
@@ -113,6 +121,28 @@ async function onSubmit() {
     form.xmProvince = areaArr[0]
     form.xmCity = areaArr[1]
     form.xmArea = areaArr[2]
+  }
+  if (!xmFriendPhone || !phoneRegex.test(xmFriendPhone)) {
+    return showToast('请检查朋友信息是否填写完整!')
+  }
+  if (!xmDirectFamilyPhone || !phoneRegex.test(xmDirectFamilyPhone)) {
+    return showToast('请检查亲属信息是否填写完整!')
+  }
+  if (!xmDetailedAddress) {
+    return showToast('请检查地址信息是否填写完整!')
+  }
+  if (!form.xmSignatureImage || !form.xmBackOfIDCardImage || !form.xmFrontOfIDCardImage) {
+    return showToast('请正确上传身份证并签署合同后提交!')
+  }
+  if (
+    !form.xmSex || !form.xmSfProvidentFund
+    || !form.xmSfMortgagingHousing || !form.xmSfCheckInSalary
+    || !form.xmSfCreditCard
+  ) {
+    return showToast('请检查个人信用信息是否填写完整!')
+  }
+  if (!form.xmFriendName || !form.xmDirectFamilyName) {
+    return showToast('请检查朋友及亲属信息是否填写完整!')
   }
   // 使用 jquery的 ajax 发送JSONP请求
   try {
@@ -307,10 +337,10 @@ function onConfirm(evt, type) {
       </div>
       <div class="tip-body">
         {{
-          `一份信任，一份坚守，一个客户，一个朋友，感谢您对我们客服经理的信任和业务支持，尚市华融将保证您的资料安全永不泄露！请您保证您申请的资料真实有效，一旦虚假，金融机构平台将会列入黑名单。所有申请需在您本人自愿的情况下申请，如果有人(诱导，冒充，强迫)您申请，可以向我们投诉。特别提示：本公司无法向在校学生群体，无收入群体等提供服务。` }}
+          `一份信任，一份坚守，一个客户，一个朋友，感谢您对我们客服经理的信任和业务支持，尚士华融将保证您的资料安全永不泄露！请您保证您申请的资料真实有效，一旦虚假，金融机构平台将会列入黑名单。所有申请需在您本人自愿的情况下申请，如果有人(诱导，冒充，强迫)您申请，可以向我们投诉。特别提示：本公司无法向在校学生群体，无收入群体等提供服务。` }}
       </div>
       <div class="tip-tail">
-        {{ `特别提示：尚市华融所有业务均无前期收费，不成功，不收费！如发现有冒充我们业务人员向您收取前期费用请投诉!` }}
+        {{ `特别提示：尚士华融所有业务均无前期收费，不成功，不收费！如发现有冒充我们业务人员向您收取前期费用请投诉!` }}
       </div>
     </div>
 
@@ -488,11 +518,13 @@ function onConfirm(evt, type) {
             name="现居地址"
             label="现居地址"
             placeholder="点击选择省市区"
+            required
             @click="showArea = true"
           />
           <van-field
             v-model="form.xmDetailedAddress"
             name="详细地址" placeholder="详细地址"
+            required
             :rules="[{ required: true, message: '请输入详细地址' }]"
           />
         </van-cell-group>
