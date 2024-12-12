@@ -3,13 +3,29 @@ import { ajaxUpload } from './ajaxUpload'
 // 函数用于从URL中获取指定查询参数的值
 export function getQueryParam(paramName) {
   // 获取当前URL中的查询参数部分
-  const queryString = window.location.search
+  const queryString = window.location.search;
 
-  // 使用URLSearchParams解析查询参数
-  const urlParams = new URLSearchParams(queryString)
+  // 检查浏览器是否支持 URLSearchParams
+  if (typeof URLSearchParams !== 'undefined') {
+      // 使用URLSearchParams解析查询参数
+      const urlParams = new URLSearchParams(queryString);
 
-  // 获取指定参数的值，如果未找到则返回空字符串
-  return urlParams.get(paramName) || ''
+      // 获取指定参数的值，如果未找到则返回空字符串
+      return urlParams.get(paramName) || '';
+  } else {
+      // 回退到手动解析方法以支持旧浏览器
+      const query = queryString.substring(1); // 移除开头的问号
+      const params = query.split('&'); // 按 & 分割成键值对数组
+
+      for (let param of params) {
+          const [key, value] = param.split('='); // 按 = 分割键和值
+          if (key === paramName) {
+              return decodeURIComponent(value || ''); // 解码并返回
+          }
+      }
+
+      return ''; // 如果未找到，返回空字符串
+  }
 }
 
 export function validatePhoneNumber(phone) {
