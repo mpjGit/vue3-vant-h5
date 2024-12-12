@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import $ from 'jquery'
+import jweixin from 'weixin-js-sdk'
 import { type PickerColumn, showToast } from 'vant'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores'
@@ -63,6 +65,76 @@ function previewFile(type) {
     router.push('/serveFile')
   }
 }
+
+function getUrlParams() {
+  $.ajax({
+    async: false,
+    type: 'post',
+    url: 'https://shryf.com/loanonlineapplication/user/getUrl',
+    data: {},
+    jsonpCallback: 'successCallback',
+    dataType: 'Jsonp',
+    beforeSend() {},
+    success(data) {
+      if (data.result === '00') { // 成功，其他失败
+        const _data = data.data
+        jweixin.config({
+          debug: false, // 根据服务端来控制是否开启调试模式
+          appId: _data.appId,
+          timestamp: _data.timestamp,
+          nonceStr: _data.nonceStr,
+          signature: _data.signature,
+          jsApiList: [],
+        })
+        weixinInit()
+      }
+      else {
+        console.error('微信设置失败！')
+      }
+    },
+    complete() {},
+    error() {
+      return false
+    },
+  })
+}
+
+function weixinInit() {
+  // 定义设置分享数据方法
+  const setShareInfo = (options) => {
+    // 分享的触发动作必须写再ready里面
+    jweixin.ready(() => {
+      // 配置分享数据
+      const shareData = {
+        title: options.title || '', // 分享的标题
+        desc: options.desc || '', // 分享的描述
+        link: options.link, // 分享的链接
+        imgUrl: options.imgUrl || '', // 分享的图片链接
+        success() {
+          // 配置成功之后的回调（并不是分享成功之后的回调，这个地方是个坑，要注意下）
+          console.warn('成功完成微信配置！')
+        },
+      }
+      // 分享给朋友接口
+      jweixin.updateAppMessageShareData(shareData)
+      // 分享到朋友圈接口
+      jweixin.updateTimelineShareData(shareData)
+    })
+  }
+
+  // 调用设置分享数据方法
+  const options = {
+    title: '尚士华融', // 分享的标题
+    desc: '正规持牌产品 多年技术沉淀 百万客户信赖 ', // 分享的描述
+    link: 'https://shryf.com/dist/index.html',
+    imgUrl: 'https://shryf.com/dist/share.png', // 分享的图片链接
+  }
+  setShareInfo(options)
+}
+
+onMounted(() => {
+  getUrlParams()
+})
 
 // function fetchVerifyCode() {}
 
@@ -237,9 +309,9 @@ function previewFile(type) {
   .top-show {
     z-index: 8;
     width: 80vw;
-    height: 25vw;
+    height: 18vw;
     position: absolute;
-    top: 80%;
+    top: 85%;
     left: 50%;
     margin-top: -15px;
     margin-left: -40vw;
