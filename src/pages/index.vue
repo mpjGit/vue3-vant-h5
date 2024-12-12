@@ -71,7 +71,9 @@ function getUrlParams() {
     async: false,
     type: 'post',
     url: 'https://shryf.com/loanonlineapplication/user/getUrl',
-    data: {},
+    data: {
+      url: 'https://shryf.com/dist/index.html',
+    },
     jsonpCallback: 'successCallback',
     dataType: 'Jsonp',
     beforeSend() {},
@@ -127,7 +129,7 @@ function weixinInit() {
     title: '尚士华融', // 分享的标题
     desc: '正规持牌产品 多年技术沉淀 百万客户信赖 ', // 分享的描述
     link: 'https://shryf.com/dist/index.html',
-    imgUrl: 'https://shryf.com/dist/share.png', // 分享的图片链接
+    imgUrl: 'https://shryf.com/image/sy.png', // 分享的图片链接
   }
   setShareInfo(options)
 }
@@ -311,7 +313,7 @@ onMounted(() => {
     width: 80vw;
     height: 18vw;
     position: absolute;
-    top: 85%;
+    top: 90%;
     left: 50%;
     margin-top: -15px;
     margin-left: -40vw;
@@ -325,10 +327,10 @@ onMounted(() => {
 
     .show-item {
       width: 10vw;
-      height: 20vw;
+      height: 18vw;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: stretch;
 
       .icon {
