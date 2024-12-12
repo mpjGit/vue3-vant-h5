@@ -16,6 +16,7 @@ const InitUserInfo = {
   nickname: '',
   avatar: '',
   phone: '',
+  id: '60933',
 }
 
 export const useUserStore = defineStore('user', () => {
@@ -28,6 +29,10 @@ export const useUserStore = defineStore('user', () => {
 
   const setPhone = (phone: string) => {
     userInfo.value.phone = phone
+  }
+
+  const setUserId = (id: string | number) => {
+    userInfo.value.id = id
   }
 
   const login = async (loginForm: LoginData) => {
@@ -96,6 +101,7 @@ export const useUserStore = defineStore('user', () => {
     reset,
     register,
     setPhone,
+    setUserId,
   }
 }, {
   persist: true,

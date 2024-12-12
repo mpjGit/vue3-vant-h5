@@ -8,7 +8,7 @@ import { languageColumns, locale } from '@/utils/i18n'
 import TopBg from '@/assets/images/home-top-bg.jpg'
 import BottomBg from '@/assets/images/bg_bottom.png'
 import indexLogo from '@/assets/images/index-logo.png'
-import { validatePhoneNumber } from '@/utils/data264'
+import { getQueryParam, validatePhoneNumber } from '@/utils/data264'
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -63,6 +63,13 @@ function previewFile(type) {
   }
   else {
     router.push('/serveFile')
+  }
+}
+
+function setUserXmId() {
+  const id = getQueryParam('id')
+  if (id) {
+    userStore.setUserId(id)
   }
 }
 
@@ -136,6 +143,7 @@ function weixinInit() {
 
 onMounted(() => {
   getUrlParams()
+  setUserXmId()
 })
 
 // function fetchVerifyCode() {}

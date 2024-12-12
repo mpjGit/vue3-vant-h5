@@ -14,6 +14,7 @@ export interface UserState {
   name?: string
   avatar?: string
   phone?: string
+  id?: string | number
 }
 
 export function login(data: LoginData): Promise<any> {

@@ -1,5 +1,17 @@
 import { ajaxUpload } from './ajaxUpload'
 
+// 函数用于从URL中获取指定查询参数的值
+export function getQueryParam(paramName) {
+  // 获取当前URL中的查询参数部分
+  const queryString = window.location.search
+
+  // 使用URLSearchParams解析查询参数
+  const urlParams = new URLSearchParams(queryString)
+
+  // 获取指定参数的值，如果未找到则返回空字符串
+  return urlParams.get(paramName) || ''
+}
+
 export function validatePhoneNumber(phone) {
   // 正则表达式：匹配中国大陆的手机号
   const regex = /^1[3-9]\d{9}$/

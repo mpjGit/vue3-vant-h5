@@ -19,7 +19,7 @@ const userInfo = computed(() => userStore.userInfo)
 
 // form 数据
 const form = reactive({
-  xmFprId: 60933,
+  xmFprId: userInfo.value.id,
   xmPhone: userInfo.value.phone,
   xmMoniker: '', // 姓名
   xmIdNo: '', // 身份证号
@@ -235,6 +235,9 @@ watch(
   (val) => {
     if (val.value && val.value.phone) {
       form.xmPhone = val.value.phone
+    }
+    if (val.value && val.value.id) {
+      form.xmFprId = val.value.id
     }
   },
 )
@@ -637,7 +640,7 @@ function onConfirm(evt, type) {
 {
   "name": "profile",
   "meta": {
-    "title": "个人中心",
+    "title": "信贷平台",
     "i18n": "menus.profile"
   }
 }
