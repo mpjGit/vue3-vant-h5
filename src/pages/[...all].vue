@@ -269,7 +269,7 @@ onMounted(() => {
     width: 200px;
     height: 190px;
     position: absolute;
-    top: -10%;
+    top: -5%;
     left: 50%;
     margin-left: -100px;
     z-index: 9;
@@ -284,12 +284,12 @@ onMounted(() => {
     align-items: stretch;
     gap: 10px;
     position: absolute;
-    top: 38%;
+    top: 45%;
     left: 50%;
     margin-left: -150px;
     color: #fff;
     border-top: 1px solid #fff;
-    padding-top: 5px;
+    padding-top: 15px;
     .up-txt {
       height: 20px;
       line-height: 20px;
