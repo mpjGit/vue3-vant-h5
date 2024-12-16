@@ -104,8 +104,8 @@ async function onSubmit() {
     xmDetailedAddress,
   } = form
   const idAuth = isIdCard(xmIdNo)
-  if (!idAuth.valid) {
-    return showToast(idAuth.message)
+  if (!idAuth.isPass) {
+    return showToast(idAuth.errorMessage)
   }
   if (!xmPhone) {
     return showToast('未获取到您的手机号，请返回登录!')
@@ -131,8 +131,11 @@ async function onSubmit() {
   if (!xmDetailedAddress) {
     return showToast('请检查地址信息是否填写完整!')
   }
-  if (!form.xmSignatureImage || !form.xmBackOfIDCardImage || !form.xmFrontOfIDCardImage) {
-    return showToast('请正确上传身份证并签署合同后提交!')
+  if (!form.xmBackOfIDCardImage || !form.xmFrontOfIDCardImage) {
+    return showToast('请正确上传身份证后提交!')
+  }
+  if (!form.xmSignatureImage) {
+    return showToast('请正确上签署合同后提交!')
   }
   if (
     !form.xmSex || !form.xmSfProvidentFund
@@ -202,13 +205,18 @@ function handleReset() {
 }
 
 function handleGenerate() {
+  if (!form.xmMoniker) {
+    return showToast('签署合同前，请先填写姓名！')
+  }
   const loading = showLoadingToast({
     message: '签署中...',
   })
   esign.value.generate().then((res) => {
     loading.close()
     resultImg.value = res
-    savePoster()
+    nextTick(() => {
+      savePoster()
+    })
   }).catch((err) => {
     loading.close()
     console.error(err)
@@ -251,9 +259,13 @@ watch(
           const { filePathNew } = res.data
           if (filePathNew && filePathNew.length) {
             form.xmFrontOfIDCardImage = filePathNew
+            showToast('身份证正面上传成功！')
           }
         }
       })
+    }
+    else {
+      form.xmFrontOfIDCardImage = ''
     }
   },
   { immediate: true },
@@ -268,9 +280,13 @@ watch(
           const { filePathNew } = res.data
           if (filePathNew && filePathNew.length) {
             form.xmBackOfIDCardImage = filePathNew
+            showToast('身份证反面上传成功！')
           }
         }
       })
+    }
+    else {
+      form.xmBackOfIDCardImage = ''
     }
   },
   { immediate: true },
