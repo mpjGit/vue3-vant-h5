@@ -161,6 +161,12 @@ async function onSubmit() {
       beforeSend() {},
       success(data) {
         if (data.result === '00') { // 成功，其他失败
+          for (const key of Reflect.ownKeys(form)) {
+            if (key === 'xmFprId' || key === 'xmPhone') {
+              continue
+            }
+            form[key] = ''
+          }
           // 跳转成功页面
           showToast({
             duration: 3000,
