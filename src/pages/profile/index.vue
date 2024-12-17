@@ -93,6 +93,15 @@ function onOversize() {
   showToast('文件大小不能超过 10MB!')
 }
 
+// 签名画板
+const esign = ref<any>(null)
+const bgColor = ref(undefined)
+const isCrop = ref(undefined)
+const lineWidth = ref(6)
+const lineColor = ref('#000000')
+const resultImg = ref<any>('')
+const signTime = ref<string>(updateTime())
+
 async function onSubmit() {
   // 必填字段的校验
   const {
@@ -166,6 +175,10 @@ async function onSubmit() {
               continue
             }
             form[key] = ''
+            fileList_front.value = []
+            fileList_back.value = []
+            signTime.value = ''
+            resultImg.value = ''
           }
           // 跳转成功页面
           showToast({
@@ -195,15 +208,6 @@ async function onSubmit() {
 const confirmContract = ref(false)
 
 const container = ref(null)
-
-// 签名画板
-const esign = ref<any>(null)
-const bgColor = ref(undefined)
-const isCrop = ref(undefined)
-const lineWidth = ref(6)
-const lineColor = ref('#000000')
-const resultImg = ref<any>('')
-const signTime = ref<string>(updateTime())
 
 function handleReset() {
   esign.value.reset()
