@@ -224,8 +224,10 @@ function handleGenerate() {
   esign.value.generate().then((res) => {
     loading.close()
     resultImg.value = res
-    nextTick(() => {
-      savePoster()
+    setTimeout(() => {
+      nextTick(() => {
+        savePoster()
+      })
     })
   }).catch((err) => {
     loading.close()
@@ -604,7 +606,7 @@ function onConfirm(evt, type) {
           我已阅读以上申请须知，同意并遵守合同条款
         </van-checkbox>
       </van-cell-group>
-      <div v-if="confirmContract" id="container" ref="container" class="pdf-container" @click.stop="savePoster">
+      <div v-if="confirmContract" id="container" ref="container" class="pdf-container">
         <img class="contract-img" style="width: 100%" :src="contract" alt="">
         <img v-show="resultImg" class="sign_img" :src="resultImg" alt="">
         <img class="z-img" :src="contract_z" alt="">
